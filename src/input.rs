@@ -23,10 +23,10 @@ pub fn read_points<P>(file_name: P) -> Vec<(i32, i32)> where P: AsRef<Path> {
 
 fn read_lines<P>(file_name: P) -> Vec<String> where P: AsRef<Path>, {
     let mut line_vector = vec!();
-    let linesResult = lines(file_name);
-    if let Ok(lines) = linesResult {
-        for lineResult in lines {
-            if let Ok(line) = lineResult {
+    let lines_result = lines(file_name);
+    if let Ok(lines) = lines_result {
+        for line_result in lines {
+            if let Ok(line) = line_result {
                 println!("{}", &line);
                 line_vector.push(line);
             }
