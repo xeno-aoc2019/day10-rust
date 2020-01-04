@@ -51,7 +51,7 @@ fn sector(star: (i32, i32)) -> i32 {
         zot => {
             println!("({},{},{})", zot.0, zot.1, zot.2);
             panic!("Should not happen");
-            5000
+            // 5000
         }
     };
     return sector;
