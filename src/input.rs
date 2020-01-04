@@ -9,7 +9,7 @@ fn to_coords(lines: Vec<String>) -> Vec<(i32, i32)> {
         for (x, c) in line.chars().enumerate() {
             if c == '#' {
                 v.push((x as i32, y as i32));
-                println!("({},{})", x, y);
+                // println!("({},{})", x, y);
             }
         }
     }
