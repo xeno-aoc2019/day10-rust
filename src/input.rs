@@ -7,7 +7,7 @@ fn to_coords(lines: Vec<String>) -> Vec<(i32, i32)> {
     let mut v = vec!();
     for (y, line) in lines.iter().enumerate() {
         for (x, c) in line.chars().enumerate() {
-            if c == '#' {
+            if c == '#' || c == 'X' {
                 v.push((x as i32, y as i32));
                 // println!("({},{})", x, y);
             }

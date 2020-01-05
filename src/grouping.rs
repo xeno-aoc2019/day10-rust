@@ -1,15 +1,24 @@
 extern crate num;
+
 use num::integer;
 
 pub fn group_surrounding_stars(station: (i32, i32), coords: Vec<(i32, i32)>) -> Vec<(i32, (i32, i32), (i32, i32), i32)> {
     let mut grouped = vec!();
-    for star in coords {
+    let mut stars = coords.clone();
+    stars.sort();
+    for star in stars {
         let dist = distance(station, star);
         if !(dist == (0, 0)) {
             let norm_dist = normalized_dist(station, star);
             let id = star.0 * 100 + star.1;
             // println!("normalized: ({},{})", norm_dist.0, norm_dist.1);
-            grouped.push((sector(norm_dist), norm_dist, dist, id));
+            let sectored_star = (sector(norm_dist), norm_dist, dist, id);
+//            println!("SECTORED: [{}], ({},{}) ({},{}), {}",
+//                    sectored_star.0,
+//                    (sectored_star.1).0, (sectored_star.1).1,
+//                    (sectored_star.2).0, (sectored_star.2).1,
+//                    sectored_star.3);
+            grouped.push(sectored_star);
         }
     }
     grouped.sort();
@@ -58,10 +67,10 @@ fn sector(star: (i32, i32)) -> i32 {
 }
 
 fn distance(station: (i32, i32), star: (i32, i32)) -> (i32, i32) {
-    (star.0 - station.0, star.1 - station.1)
+    (star.0 - station.0, station.1 - star.1)
 }
 
-fn normalized_dist(station: (i32, i32), star: (i32, i32)) -> (i32, i32) {
+pub fn normalized_dist(station: (i32, i32), star: (i32, i32)) -> (i32, i32) {
     let dist = distance(station, star);
     let gcd = integer::gcd(dist.0, dist.1);
     if gcd == 0 {
